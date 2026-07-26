@@ -1,0 +1,67 @@
+Here is a comprehensive guide and the exact prompt you can feed into Claude Code to build your health tracking application.
+
+Because you want to use React JS for the UI but also deploy as native Android and iOS applications, the best architectural approach is to wrap your React web app using **Capacitor**. This allows you to maintain a single React codebase that compiles to Web, iOS, and Android seamlessly.
+
+For handling scanned PDFs and images, the prompt instructs the AI to implement an OCR (Optical Character Recognition) service interface, which you can hook up to a robust tool like Azure Document Intelligence, AWS Textract, or a local Tesseract library.
+
+### Recommended Technology Stack
+
+| Component | Technology / Tool |
+| --- | --- |
+| **Backend API** | C# .NET 8 (or 9) Minimal API |
+| **Database** | PostgreSQL |
+| **ORM** | Entity Framework Core (Npgsql) |
+| **Frontend UI** | React JS (Vite, TypeScript, Tailwind CSS) |
+| **Mobile Wrapper** | Capacitor (by Ionic) |
+| **Document/OCR processing** | Tesseract.NET (local) or Cloud OCR API integration |
+| **File Storage** | Local File System or AWS S3 / Azure Blob |
+
+---
+
+### The Claude Code Prompt
+
+Copy and paste the text in the blockquote below directly into Claude Code.
+
+> Act as a Senior Full-Stack Engineer and System Architect. I want to build a cross-platform Health Tracking application.
+> **Technology Stack:**
+> * Backend: C# .NET 8 Minimal REST API.
+> * Database: PostgreSQL using Entity Framework Core (Code-First).
+> * Frontend: React JS with Vite, TypeScript, and Tailwind CSS for responsive mobile-first design.
+> * Mobile Deployment: Capacitor to wrap the React build for iOS and Android.
+> 
+> 
+> **Core Entities & Features:**
+> * **YearlyCheckups:** Track annual comprehensive health check details (Date, Doctor, General Notes, DocumentPath).
+> * **BiweeklyMetrics:** Track frequent body composition parameters (Date, Weight, BMI, Visceral Fat, Body Fat Percentage, Muscle Mass).
+> * **DocumentUploads:** Support uploading normal PDFs, scanned PDFs, and images (JPEG/PNG).
+> 
+> 
+> **Phase 1: Backend Setup & PostgreSQL Database**
+> Initialize a .NET 8 Minimal API project. Configure Entity Framework Core with the Npgsql provider. Create the entity models for `YearlyCheckup` and `BiweeklyMetric`. Include a generic `BaseEntity` with `Id`, `CreatedAt`, and `UpdatedAt` fields. Generate and apply the initial EF Core migrations. Set up a simple repository pattern or direct DbContext injection for database operations.
+> **Phase 2: Minimal API Endpoints**
+> Create RESTful CRUD endpoints using Minimal API routing groups (e.g., `/api/checkups` and `/api/metrics`). Ensure all endpoints return appropriate HTTP status codes and use dependency injection.
+> **Phase 3: File Upload & OCR Interface**
+> Create an endpoint `/api/documents/upload` that accepts `multipart/form-data`. Save the uploaded PDFs/Images locally for now. Define an interface `IDocumentIntelligenceService` with a method `ExtractMetricsAsync(Stream fileStream)`. Implement a dummy version of this service that returns mock structured data. Leave clear comments on where I can plug in Tesseract.NET or Azure AI Vision for parsing scanned images and PDFs later.
+> **Phase 4: React JS Frontend Development**
+> Initialize a React Vite project. Configure Tailwind CSS. Create a responsive layout consisting of a Dashboard, a Data Entry Form (for manual entry), and a Document Upload view. Ensure the UI is highly responsive and looks like a native app when viewed on mobile screens. Create an API service module using `fetch` or `axios` to communicate with the .NET backend.
+> **Phase 5: Mobile Wrapping with Capacitor**
+> Initialize Capacitor in the React project. Add iOS and Android platforms. Provide me with the exact scripts and commands to build the React app, sync it with Capacitor, and open Android Studio and Xcode for deployment.
+> Please execute this step-by-step. Start with Phase 1 and wait for my confirmation before moving to the next phase. Ask clarifying questions if you need to determine specific database column types or UI color schemes.
+
+---
+
+### Skills, MCPs, and Context to Provide
+
+To ensure Claude Code can interact successfully with your environment, provide it with the following configurations and tools:
+
+**Model Context Protocol (MCP) Servers to Enable:**
+
+* **PostgreSQL MCP:** Enable a Postgres MCP server so Claude can directly query your local database, verify schema creation, and debug EF Core migration issues.
+* **File System MCP:** Allow Claude to read, write, and modify project files securely within your designated workspace folder.
+* **Terminal/Command MCP:** Crucial for allowing Claude Code to run `dotnet build`, `dotnet ef migrations add`, `npm install`, and Capacitor commands automatically.
+
+**Environmental Details to Share with Claude:**
+
+* **Connection Strings:** Provide a local PostgreSQL connection string (e.g., `Host=localhost;Database=healthtracker;Username=postgres;Password=yourpassword`).
+* **SDK Versions:** Explicitly tell Claude your currently installed versions of the .NET SDK (e.g., `dotnet --version`) and Node.js (e.g., `node -v`).
+* **Desired OCR Strategy:** Tell Claude if you plan to use a paid cloud service (Azure/AWS) or if you want an entirely free local setup (Tesseract). Cloud services handle scanned, handwritten, and skewed PDFs far better than free local libraries.
