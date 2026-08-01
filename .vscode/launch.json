@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Health Tracker",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/source/HealthTracker.Server/bin/Debug/net10.0/HealthTracker.Server.dll",
+            "args": ["/path:${workspaceFolder}/source/HealthTracker.Server"],
+            "cwd": "${workspaceFolder}/source/HealthTracker.Server",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "%s/scalar"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "DEVELOPMENT",
+                "ASPNETCORE_URLS": "https://localhost:5001",
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/source/HealthTracker.Server/Views"
+            }
+        }
+    ]
+}
