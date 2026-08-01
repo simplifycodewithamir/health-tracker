@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/DataMigration/">
+    <Project Path="HealthTracker.DataMigration.postgresql/HealthTracker.DataMigration.postgresql.csproj" Id="c2005510-1b10-48ed-afe9-5f2a134a2b36" />
+  </Folder>
+  <Folder Name="/SolutionItems/">
+    <File Path="../.vscode/launch.json" />
+    <File Path="Directory.Build.targets" />
+    <File Path="first-claude-promt.txt" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="../tests/HealthTracker.IntegrationTests/HealthTracker.IntegrationTests.csproj" />
+    <Project Path="../tests/HealthTracker.UnitTests/HealthTracker.UnitTests.csproj" />
+  </Folder>
+  <Project Path="HealthTracker.AppHost/HealthTracker.AppHost.csproj" />
+  <Project Path="HealthTracker.DataRepository/HealthTracker.DataRepository.csproj" Id="cb119586-b7a5-4626-bcf6-737d49dd24e0" />
+  <Project Path="HealthTracker.Server/HealthTracker.Server.csproj" />
+</Solution>

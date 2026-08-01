@@ -7,6 +7,18 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
 
+#User-specif files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+#Logs
+*.log
+
+#User-specif files (MonoDevelop/Xamrin Studio)
+*.userprefs
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -56,3 +68,6 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 /.vs
+
+# Visual studio files
+.vs/
