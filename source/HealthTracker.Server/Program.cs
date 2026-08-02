@@ -1,4 +1,5 @@
 using HealthTracker.Server;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +11,7 @@ builder.AddRedisClientBuilder("cache").WithOutputCache();
 builder.Services.AddProblemDetails();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
-
-//builder.Services
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
@@ -21,7 +20,8 @@ app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
-    //app.MapOpenApi();
+    app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseOutputCache();
