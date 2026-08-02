@@ -1,3 +1,5 @@
+using HealthTracker.Server;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
@@ -23,5 +25,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseOutputCache();
+
+app.MapHealthTrackerEndPoints();
 
 app.Run();

@@ -1,12 +1,15 @@
-﻿namespace HealthTracker.Server
+namespace HealthTracker.Server;
+
+internal static class HealthTrackerEndPoints
 {
-    internal static class HealthTrackerEndPoints
+    private const string BasePath = "/healthtracker";
+
+    internal static void MapHealthTrackerEndPoints(this WebApplication app)
     {
-        internal static void MapTrackerEndPoints(this WebApplication app)
-        {
-            app.MapGet("/api/health", () => Results.Ok("HealthTracker API is running."))
-                .CacheOutput(p => p.Expire(TimeSpan.FromSeconds(5)))
-                .WithName("CheckAppHealth"); ;
-        }
+        var group = app.MapGroup(BasePath);
+
+        group.MapGet("/health", () => Results.Ok("HealthTracker API is running."))
+            .AllowAnonymous()
+            .WithName("CheckAppHealth");
     }
 }
