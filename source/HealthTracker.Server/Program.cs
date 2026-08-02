@@ -24,4 +24,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseOutputCache();
 
+app.MapHealthTrackerEndPoints();
+
 app.Run();
