@@ -2,11 +2,17 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "dotnet",
-			"task": "build",
+			"label": "build",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/source/HealthTracker.Server/HealthTracker.Server.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
 			"group": "build",
-			"problemMatcher": [],
-			"label": "build"
+			"problemMatcher": "$msCompile"
 		}
 	]
 }
