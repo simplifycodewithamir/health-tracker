@@ -1,3 +1,4 @@
+using HealthTracker.Server;
 using Scalar.AspNetCore;
 using Serilog;
 
@@ -28,5 +29,6 @@ if (app.Environment.IsDevelopment())
 app.UseOutputCache();
 
 app.MapDefaultEndpoints();
+app.MapHealthTrackerEndPoints();
 
 app.Run();
