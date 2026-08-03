@@ -8,7 +8,7 @@ internal static class HealthTrackerEndPoints
     {
         var group = app.MapGroup(BasePath);
 
-        group.MapGet("/health", () => Results.Ok("HealthTracker API is running."))
+        group.MapGet("/dummy-end-point", () => Results.Ok("HealthTracker API is running."))
             .AllowAnonymous()
             .WithName("CheckAppHealth");
     }
