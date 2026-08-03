@@ -1,12 +1,9 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using Serilog;
 
 namespace Microsoft.Extensions.Hosting;
 
@@ -46,10 +43,26 @@ public static class Extensions
 
     public static TBuilder ConfigureOpenTelemetry<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
     {
-        builder.Logging.AddOpenTelemetry(logging =>
+        builder.Services.AddSerilog((services, loggerConfiguration) =>
         {
-            logging.IncludeFormattedMessage = true;
-            logging.IncludeScopes = true;
+            loggerConfiguration
+                .ReadFrom.Configuration(builder.Configuration)
+                .ReadFrom.Services(services)
+                .Enrich.FromLogContext()
+                .WriteTo.Console();
+
+            var otlpEndpoint = builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"];
+            if (!string.IsNullOrWhiteSpace(otlpEndpoint))
+            {
+                loggerConfiguration.WriteTo.OpenTelemetry(otel =>
+                {
+                    otel.Endpoint = otlpEndpoint;
+                    otel.ResourceAttributes = new Dictionary<string, object>
+                    {
+                        ["service.name"] = builder.Environment.ApplicationName
+                    };
+                });
+            }
         });
 
         builder.Services.AddOpenTelemetry()
