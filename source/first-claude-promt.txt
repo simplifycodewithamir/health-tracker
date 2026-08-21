@@ -1,3 +1,23 @@
+================
+Gemini Prompt - 
+================
+I want to develop a web app using c#.net , minimal rest api, postgresql relational database, to track my health checks year by year.
+Also i want to track other biweekly parameters like bmi, viceral fat, body fat %age, muscle mass, etc.
+I should be able to either add these details via web ui or via pdf , the pdf can be normal pdf or scanned images also.
+Also i can upload images.
+
+The ui should be in react js and create responsive ui that should work on mobile as well.
+The app should be deployable as web app as well as android app and ios app.
+
+Give me full detailed promt that i should give to claude code for this task.
+
+Also provide skills,  mcp and other details which i can provide to claude code.
+
+Give me a detailed
+
+===============
+Gemini Response
+===============
 Here is a comprehensive guide and the exact prompt you can feed into Claude Code to build your health tracking application.
 
 Because you want to use React JS for the UI but also deploy as native Android and iOS applications, the best architectural approach is to wrap your React web app using **Capacitor**. This allows you to maintain a single React codebase that compiles to Web, iOS, and Android seamlessly.
