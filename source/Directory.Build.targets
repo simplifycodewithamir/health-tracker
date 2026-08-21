@@ -17,7 +17,9 @@
 	<PackageReference Update="OpenTelemetry.Instrumentation.AspNetCore" Version="1.17.0" />
 	<PackageReference Update="OpenTelemetry.Instrumentation.Http" Version="1.17.0" />
 	<PackageReference Update="OpenTelemetry.Instrumentation.Runtime" Version="1.17.0" />
-	
+	<PackageReference Update="Serilog.AspNetCore" Version="10.0.0" />
+	<PackageReference Update="Serilog.Sinks.OpenTelemetry" Version="4.2.0" />
+
   </ItemGroup>
 
   <ItemGroup Label="Include">

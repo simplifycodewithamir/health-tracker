@@ -1,5 +1,6 @@
 using HealthTracker.Server;
 using Scalar.AspNetCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddOpenApi();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseSerilogRequestLogging();
 app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
@@ -26,6 +28,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseOutputCache();
 
+app.MapDefaultEndpoints();
 app.MapHealthTrackerEndPoints();
 
 app.Run();
